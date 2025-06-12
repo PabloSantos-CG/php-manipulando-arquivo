@@ -21,7 +21,11 @@ Os dados são salvos em um arquivo de texto localizado no diretório `data/data.
 
 ## 🚀 Como usar
 
-Navegue até a pasta do projeto e execute os comandos no terminal:
+Navegue até a pasta do projeto e execute *um dos* comandos no terminal:
 
 ```bash
-php public/index.php tipo_de_operacao_desejada_aqui (C, R, U, D)
+php public/index.php C
+php public/index.php R
+php public/index.php U
+php public/index.php D
+```
