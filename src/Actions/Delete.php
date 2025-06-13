@@ -13,7 +13,8 @@ class Delete
         private ?string $name = null,
     ) {}
 
-    private function getDataInFile()
+    /** @return array<int, string[]> */
+    private function getDataInFile(): array
     {
         $file = \fopen($this->path, 'r');
         $data = [];
@@ -25,7 +26,7 @@ class Delete
         return $data;
     }
 
-    public function index()
+    public function index(): bool
     {
         $fExists = FileValidator::checkFileExists($this->path);
 
@@ -33,9 +34,14 @@ class Delete
         if (!$this->name) return \unlink($this->path);
 
         $data = $this->getDataInFile();
+        $data = \array_filter($data, fn($current) => $current[0] != $this->name);
 
-        
-        
+        $file = \fopen($this->path, 'w');
+
+        \fputcsv($file, $data);
+        \fclose($file);
+
+        return true;
     }
 }
 /*
