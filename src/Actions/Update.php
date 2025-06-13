@@ -4,7 +4,7 @@ namespace App\Actions;
 
 use App\Interfaces\ActionInterface;
 
-class Update implements ActionInterface
+class Update
 {
 
     public function index(): void {}

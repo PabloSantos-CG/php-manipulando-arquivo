@@ -2,12 +2,10 @@
 
 namespace App\Actions;
 
-use App\Interfaces\ActionInterface;
 use App\Utils\FileValidator;
-use ErrorException;
-use SplFileObject;
 
-class Create implements ActionInterface
+
+class Create
 {
     /**
      * @param string[] $data
@@ -16,6 +14,7 @@ class Create implements ActionInterface
         private string $path,
         private array $data,
     ) {}
+
 
     public function index(): void
     {
