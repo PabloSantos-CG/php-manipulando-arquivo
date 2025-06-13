@@ -2,5 +2,13 @@
 
 namespace App\Actions;
 
+use App\Interfaces\ActionInterface;
 
-class Delete {}
+// name
+class Delete implements ActionInterface {
+
+    public function index(): void
+    {
+        
+    }
+}

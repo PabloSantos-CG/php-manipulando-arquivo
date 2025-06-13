@@ -2,5 +2,10 @@
 
 namespace App\Actions;
 
+use App\Interfaces\ActionInterface;
 
-class Update {}
+class Update implements ActionInterface
+{
+
+    public function index(): void {}
+}

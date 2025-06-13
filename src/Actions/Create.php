@@ -2,22 +2,31 @@
 
 namespace App\Actions;
 
+use App\Interfaces\ActionInterface;
 use App\Utils\FileValidator;
 use ErrorException;
 use SplFileObject;
 
-class Create
+class Create implements ActionInterface
 {
-    public function index(string $path, string $name, string $phoneNumber): void
+    /**
+     * @param string[] $data
+     */
+    public function __construct(
+        private string $path,
+        private array $data,
+    ) {}
+
+    public function index(): void
     {
-        $fExists = FileValidator::checkFileExists($path);
-        $file = \fopen($path, 'a');
+        $fExists = FileValidator::checkFileExists($this->path);
+        $file = \fopen($this->path, 'a');
 
         if (!$fExists) {
             \fputcsv($file, ['name', 'phoneNumber']);
         }
 
-        \fputcsv($file, [$name, $phoneNumber]);
+        \fputcsv($file, $this->data);
         \fclose($file);
     }
 }

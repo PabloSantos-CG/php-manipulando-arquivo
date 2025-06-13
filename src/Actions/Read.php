@@ -2,5 +2,10 @@
 
 namespace App\Actions;
 
+use App\Interfaces\ActionInterface;
 
-class Read {}
+class Read implements ActionInterface
+{
+
+    public function index(): void {}
+}
