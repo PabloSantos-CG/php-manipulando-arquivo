@@ -44,11 +44,3 @@ class Delete
         return true;
     }
 }
-/*
-retorno é uma lista de linhas
-entao devo percorrer cada linha e ver se o nome da match
-se der:
-    linha a ser apagada
-se não:
-    retorna false
-*/
