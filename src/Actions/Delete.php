@@ -2,43 +2,38 @@
 
 namespace App\Actions;
 
-use App\Utils\FileValidator;
-
+use App\Utils\FileHandler;
 
 class Delete
 {
 
     public function __construct(
         private string $path,
-        private ?string $name = null,
+        private ?string $target = null,
     ) {}
 
-    /** @return array<int, string[]> */
-    private function getDataInFile(): array
-    {
-        $file = \fopen($this->path, 'r');
-        $data = [];
 
-        while (($line = \fgetcsv($file)) !== false) {
-            $data[] = $line;
-        }
-
-        return $data;
-    }
 
     public function index(): bool
     {
-        $fExists = FileValidator::checkFileExists($this->path);
+        $fExists = FileHandler::checkFileExists($this->path);
 
         if (!$fExists) return false;
-        if (!$this->name) return \unlink($this->path);
+        if (!$this->target) return \unlink($this->path);
 
-        $data = $this->getDataInFile();
-        $data = \array_filter($data, fn($current) => $current[0] != $this->name);
 
+        $data = FileHandler::getDataInFile($this->path);
+
+        if (!FileHandler::checkValueInList($data, $this->target)) {
+            return false;
+        }
+
+        $data = \array_filter($data, fn($current) => $current[0] !== $this->target);
         $file = \fopen($this->path, 'w');
 
-        \fputcsv($file, $data);
+        foreach ($data as $row) {
+            \fputcsv($file, $row);
+        }
         \fclose($file);
 
         return true;

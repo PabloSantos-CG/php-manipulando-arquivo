@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-use App\Utils\FileValidator;
+use App\Utils\FileHandler;
 
 
 class Create
@@ -18,10 +18,11 @@ class Create
 
     public function index(): void
     {
-        $fExists = FileValidator::checkFileExists($this->path);
+        $fileExists = FileHandler::checkFileExists($this->path);
         $file = \fopen($this->path, 'a');
 
-        if (!$fExists) {
+        $fileIsEmpty = FileHandler::checkIfEmpty($this->path);
+        if (!$fileExists || $fileIsEmpty) {
             \fputcsv($file, ['name', 'phoneNumber']);
         }
 

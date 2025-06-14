@@ -2,8 +2,7 @@
 
 namespace App\Actions;
 
-use App\Utils\FileValidator;
-
+use App\Utils\FileHandler;
 
 class Read
 {
@@ -14,7 +13,7 @@ class Read
 
     public function index(): ?array
     {
-        $fExists = FileValidator::checkFileExists($this->path);
+        $fExists = FileHandler::checkFileExists($this->path);
         if (!$fExists) return null;
 
         $file = \fopen($this->path, 'r');
