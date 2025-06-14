@@ -16,7 +16,7 @@ class Create
     ) {}
 
 
-    public function index(): void
+    public function index(): bool
     {
         $fileExists = FileHandler::checkFileExists($this->path);
         $file = \fopen($this->path, 'a');
@@ -28,5 +28,7 @@ class Create
 
         \fputcsv($file, $this->data);
         \fclose($file);
+
+        return true;
     }
 }

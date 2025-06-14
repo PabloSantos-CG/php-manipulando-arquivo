@@ -11,10 +11,10 @@ class Read
     ) {}
 
 
-    public function index(): ?array
+    public function index(): bool
     {
         $fExists = FileHandler::checkFileExists($this->path);
-        if (!$fExists) return null;
+        if (!$fExists) return false;
 
         $file = \fopen($this->path, 'r');
         $data = [];
@@ -25,6 +25,7 @@ class Read
 
         \fclose($file);
 
-        return $data;
+        echo \var_dump($data) . \PHP_EOL;
+        return true;
     }
 }
